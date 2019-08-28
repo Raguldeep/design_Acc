@@ -2,7 +2,9 @@ package BusinessMethods;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 
 public class Login_Page extends designAcc.designAcc.ExcelWriter {
 
@@ -11,33 +13,47 @@ public class Login_Page extends designAcc.designAcc.ExcelWriter {
 	public static void main(String[] args) throws Exception {
 
 		System.setProperty("webdriver.chrome.driver", "D://Ragul//drivers//chromedriver.exe");
-		// WebDriver driver = new FirefoxDriver();
-
 		driver = new ChromeDriver();
-
-	/*	
-		  driver.get("https://www.flipkart.com/");
-		  driver.findElement(By.xpath("//button[@class='_2AkmmA _29YdH8']")).
-		  click();
-		  
-		  driver.findElement(By.xpath("//input[@name='q']")).sendKeys("mobiles"); 
-		  driver.findElement(By.xpath("//button[@type='submit']")).click();
-	*/
-		 
-
-		driver.get("https://www.travelguru.com/hotel-registration/register.shtml");
-		
-		//driver.get("file:///C:/Users/daisymanik.MAVERICSYSTEMS/Documents/test.html");
-
-		// driver.get("http://newtours.demoaut.com/mercuryregister.php");
-
+	
+	//Application URL
+		driver.get("https://connect.maveric-systems.com/index.php/site/login");
 		driver.manage().window().maximize();
+	
+	//Connect - Login Credentials
+		driver.findElement(By.id("LoginForm_username")).sendKeys("raguldeepr");
+		driver.findElement(By.id("LoginForm_password")).sendKeys("Connect@1991");
+		driver.findElement(By.name("yt0")).click();
+		Thread.sleep(5000);
+		
+	//TimeCard Page
+		Actions actions = new Actions(driver);
+		WebElement menuOption = driver.findElement(By.xpath("//a[contains(text(),'Timecard')]/child::img"));
+		actions.moveToElement(menuOption).perform();
+		driver.findElement(By.xpath("//a[contains(text(),'Add Timecard')]")).click();
 		Thread.sleep(5000);
 		designAccelator(driver);
-
-		/*
-		 * driver.get("http://www.echoecho.com/htmlframes08.htm");
-		 * designAccelator(driver); Thread.sleep(5000);
-		 */
+		
+	//Service - Skill Page
+		Actions actions1 = new Actions(driver);
+		WebElement menuOption1 = driver.findElement(By.xpath("//a[contains(text(),'Services')]/child::img"));
+		actions1.moveToElement(menuOption1).perform();
+		
+		Actions act = new Actions(driver);
+		WebElement submenuOption = driver.findElement(By.xpath("//a[contains(text(),'Skill Matrix')]/child::img"));
+		act.moveToElement(submenuOption).perform();
+		driver.findElement(By.xpath("//a[contains(text(),'My Skills')]")).click();
+		driver.findElement(By.xpath("//a[contains(text(),'Add New Skill')]")).click();
+		designAccelator(driver);
+		
+	//Activities - Enrollment Page		
+		Actions activity = new Actions(driver);
+		WebElement actMenu = driver.findElement(By.xpath("//a[contains(text(),'Activities')]/child::img"));
+		activity.moveToElement(actMenu).perform();
+		
+		Actions mavCric = new Actions(driver);
+		WebElement mav = driver.findElement(By.xpath("//a[contains(text(),'Maveric Cricket Club')]/child::img"));
+		mavCric.moveToElement(mav).perform();
+		driver.findElement(By.xpath("//a[contains(text(),'Enrollment')]")).click();
+		designAccelator(driver);
 	}
 }

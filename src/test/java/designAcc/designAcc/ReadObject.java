@@ -297,9 +297,17 @@ public class ReadObject {
 		
 		SkelWriter.write("package Object_Repository;\n\n");
 		SkelWriter.write("import org.openqa.selenium.By;\n\n");
-		SkelWriter.write("public class " + skelClassName + "{\n\n");
-		SkelWriter.write("//New Skel Code for newly identified Objects");
 		
+		SkelWriter.write("import Utilities.Wrapper;\n\n");
+		SkelWriter.write("import org.openqa.selenium.WebDriver; \n\n");
+
+		
+		
+		SkelWriter.write("public class " + skelClassName + " extends Wrapper" + "{\n\n");
+		//SkelWriter.write("@SuppressWarnings(" +"null"+")" + "\n\n");
+		SkelWriter.write("public static void main(String[] args)" + "{\n\n");
+		SkelWriter.write("//New Skel Code for newly identified Objects \n\n");
+		SkelWriter.write("WebDriver driver = null; \n\n");
 		for(int i = 0; i < newlist.size() ; i++) {
 			String new_Value = newObject.get(newlist.get(i));
 			String newValue;
@@ -312,53 +320,54 @@ public class ReadObject {
 				
 			switch (new_Value) {
 			
-			case "EditBox":
-				SkelWriter.write("//Skeleton code for new object and need to add the field ' " + newValue + "' in test data sheet \n\n");
-				SkelWriter.write("//enterInputText(\"" + newValue + "\" , testdata.get(\"" + newValue + "\"));\n");
-				SkelWriter.write("verifyText_SoftAssert(\"" + newValue + "\", testdata.get(\"" + newValue + "\"));\n");
-				SkelWriter.write("driver.findElement(\"" + newValue + "\").getText();\n\n");
+			case "text":
+				SkelWriter.write("//Skeleton code for new object and need to add the field ' " + newValue + "' in test data sheet \n");
+				SkelWriter.write("//enterInputText(\"" + newValue + "\" , testdata.get(\"" + newValue + "\"));\n\n");
+				SkelWriter.write("   verifyText_SoftAssert(\"" + newValue + "\", (\"" + newValue + "\"));\n\n");
+				SkelWriter.write("   driver.findElement(By.xpath(\"" + newValue + "\")).getText();\n\n");
 				break;
 			
-			case "RadioButton":
-				SkelWriter.write("//Skeleton code for new object" + newValue + "\n\n");
-				SkelWriter.write("actionClick(\"" + newValue + "\");\n");
+			case "Radio":
+				SkelWriter.write("//Skeleton code for new object" + newValue + "\n");
+				SkelWriter.write("   actionClick(\"" + newValue + "\");\n\n");
 				break;
 				
-			case "CheckBox":
-				SkelWriter.write("//Skeleton code for new object" + newValue + "\n\n");
-				SkelWriter.write("actionClick(\"" + newValue + "\");\n");
+			case "checkbox":
+				SkelWriter.write("//Skeleton code for new object" + newValue + "\n");
+				SkelWriter.write("   actionClick(\"" + newValue + "\");\n\n");
 				break;
 				
 			case "Button":
-				SkelWriter.write("//Skeleton code for new object" + newValue + "\n\n");
-				SkelWriter.write("actionClick(\"" + newValue + "\");\n");
-				SkelWriter.write("driver.findElement(\"" + newValue + "\").getText();\n\n");
+				SkelWriter.write("//Skeleton code for new object" + newValue + "\n");
+				SkelWriter.write("   actionClick(\"" + newValue + "\");\n\n");
+				SkelWriter.write("   driver.findElement(By.xpath(\"" + newValue + "\")).getText();\n\n");
 				break;
 				
-			case "Dropdown":
-				SkelWriter.write("//Skeleton code for new object and need to add the field '" + newValue + "' in test data sheet \n\n");
-				SkelWriter.write("selectDropdownText(\"" + newValue + "\", testdata.get(\"" + newValue + "\"));\n");
-				SkelWriter.write("verifyText_SoftAssert(\"" + newValue + "\", testdata.get(\"" + newValue + "\"));\n");
-				SkelWriter.write("actionClick(\"" + newValue + "\");\n");
+			case "select":
+				SkelWriter.write("//Skeleton code for new object and need to add the field '" + newValue + "' in test data sheet \n");
+				SkelWriter.write("   selectDropdownText(\"" + newValue + "\", (\"" + newValue + "\"));\n\n");
+				SkelWriter.write("   verifyText_SoftAssert(\"" + newValue + "\", (\"" + newValue + "\"));\n\n");
+				SkelWriter.write("   actionClick(\"" + newValue + "\");\n\n");
 				break;
 
 			case "Link":
-				SkelWriter.write("//Skeleton code for new object " + newValue + "\n\n");
-				SkelWriter.write("driver.findElement(\"" + newValue + "\").getText(); \n\n");
-				SkelWriter.write("actionClick(\"" + newValue + "\");\n");
+				SkelWriter.write("//Skeleton code for new object " + newValue + "\n");
+				SkelWriter.write("   driver.findElement(By.xpath(\"" + newValue + "\")).getText(); \n\n");
+				SkelWriter.write("   actionClick(\"" + newValue + "\");\n\n");
 				break;
 				
 			case "SPAN":
-				SkelWriter.write("//Skeleton code for new object " + newValue + "\n\n");
-				SkelWriter.write("verifyText_SoftAssert(\"" + newValue + "\", testdata.get(\"" + newValue + "\")); \n\n");
-				SkelWriter.write("driver.findElement(\"" + newValue + "\").getText();\n\n");
-				SkelWriter.write("actionClick(\"" + newValue + "\");\n");
+				SkelWriter.write("//Skeleton code for new object " + newValue + "\n");
+				SkelWriter.write("   verifyText_SoftAssert(\"" + newValue + "\", testdata.get(\"" + newValue + "\")); \n\n");
+				SkelWriter.write("   driver.findElement(By.xpath(\"" + newValue + "\")).getText();\n\n");
+				SkelWriter.write("   actionClick(\"" + newValue + "\");\n\n");
 				break;
 				
 			default:
 				break;
 			}
 		}
+		SkelWriter.write("\n  }\n");
 		SkelWriter.write("\n}\n");
 		SkelWriter.close();
 		}
